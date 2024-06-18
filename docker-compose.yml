@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  customer-service:
+    container_name: customer-service
+    image: customer-service
+    build:
+      context: ./customer-service/
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=jdbc:sqlserver://order-db:1433;databaseName=customer-service;encrypt=true;trustServerCertificate=true
+      - DATABASE_USER=sa
+      - DATABASE_PASSWORD=@Potter77
+      - PORT=8080
+      - PRODUCT_SERVICE_URL=http://product-service:8081
+      - USER_SERVICE_URL=http://transnation-service:8082
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 700M
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - order-db
+    networks:
+      - reactive-network
+     
+  transnation-service:
+    container_name: transnation-service
+    image: transnation-service
+    build:
+      context: ./transnation-service/
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=jdbc:postgresql://user-db:5432/postgres
+      - DATABASE_URL=postgres
+      - DATABASE_PASSWORD=postgres
+      - PORT=8082
+    ports:
+      - "8082:8082"
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 700M
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - user-db
+    networks:
+      - reactive-network
+      
+  db:
+    container_name: db
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=transnation-service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=America/Sao_Paulo
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    networks:
+      - reactive-network
+
+networks:
+  reactive-network:
+    name: reactive-network
+    driver: bridge
