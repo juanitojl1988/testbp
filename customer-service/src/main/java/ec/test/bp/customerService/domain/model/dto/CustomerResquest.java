@@ -10,9 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomerDto {
+public class CustomerResquest {
 
-    private Long customerid;
     private String identification;
     private String name;
     private PersonEnum.Gender gender;
