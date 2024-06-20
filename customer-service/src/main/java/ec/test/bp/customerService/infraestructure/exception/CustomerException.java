@@ -1,4 +1,4 @@
-package ec.test.bp.customerService.infraestructure.adapter.exception;
+package ec.test.bp.customerService.infraestructure.exception;
 
 import org.springframework.http.HttpStatus;
 
