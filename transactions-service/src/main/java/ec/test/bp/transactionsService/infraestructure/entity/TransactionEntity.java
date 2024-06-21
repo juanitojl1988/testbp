@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "transaction")
-public class Transaction {
+public class TransactionEntity {
 
     @Id
     @Column("id")
@@ -37,7 +37,7 @@ public class Transaction {
     private AcciontConstant.State state;
     
     @Transient
-    private Account account;
+    private AccountEntity account;
 
 
 }
