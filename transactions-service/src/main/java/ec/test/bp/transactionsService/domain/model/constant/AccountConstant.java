@@ -1,6 +1,6 @@
 package ec.test.bp.transactionsService.domain.model.constant;
 
-public class AcciontConstant {
+public class AccountConstant {
 
     public enum TypeAccount {
         A,

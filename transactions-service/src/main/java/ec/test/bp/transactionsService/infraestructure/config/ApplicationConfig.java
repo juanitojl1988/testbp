@@ -12,16 +12,16 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public AccountService customerService(AccountRepositoryPort customerRepositoryPort) {
+    public AccountService accountService(AccountRepositoryPort customerRepositoryPort) {
 
         return new AccountService(new GetAccountUseCaseImp(customerRepositoryPort),
                 new CreateAccountUseCaseImp(customerRepositoryPort));
 
     }
-    @Bean
-    public AccountRepositoryPort accountRepositoryPort(JpaAccountRepositoryAdapter jpaAccountRepositoryAdapter) {
-        return jpaAccountRepositoryAdapter;
-    }
 
+//    @Bean
+//    public AccountRepositoryPort accountRepositoryPort(JpaAccountRepositoryAdapter jpaAccountRepositoryAdapter) {
+//        return jpaAccountRepositoryAdapter;
+//    }
 
 }

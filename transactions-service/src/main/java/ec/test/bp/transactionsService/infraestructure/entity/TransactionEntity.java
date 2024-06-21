@@ -1,6 +1,6 @@
 package ec.test.bp.transactionsService.infraestructure.entity;
 
-import ec.test.bp.transactionsService.domain.model.constant.AcciontConstant;
+import ec.test.bp.transactionsService.domain.model.constant.AccountConstant;
 import ec.test.bp.transactionsService.domain.model.constant.TransactionConstant;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +34,10 @@ public class TransactionEntity {
     private BigDecimal balance;
 
     @Column("state")
-    private AcciontConstant.State state;
+    private AccountConstant.State state;
+
+    @Column("account_id")
+    private Long accountId;
     
     @Transient
     private AccountEntity account;

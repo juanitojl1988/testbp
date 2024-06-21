@@ -1,4 +1,4 @@
-package ec.test.bp.transactionsService.infraestructure.mapper.rest;
+package ec.test.bp.transactionsService.infraestructure.rest;
 
 import ec.test.bp.transactionsService.application.service.AccountService;
 import ec.test.bp.transactionsService.domain.model.dto.AccountDto;
@@ -20,14 +20,16 @@ public class AccountControllerImp implements AccountController {
     }
 
     @Override
-    public Mono<ResponseEntity<AccountDto>> getCostumerById(Long id) {
+    public Mono<ResponseEntity<AccountDto>> getAccountById(Long id) {
+        log.info("getAccountById: Id={}", id);
         return accountService.getById(id).map(student -> {
             return new ResponseEntity<>(student, HttpStatus.OK);
-        });
+        }).defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @Override
-    public Mono<ResponseEntity<AccountDto>> createCustomer(AccountResquestDto accountResquestDto) {
+    public Mono<ResponseEntity<AccountDto>> createAccount(AccountResquestDto accountResquestDto) {
+        log.info("createAccount: {}", accountResquestDto);
         return accountService.create(accountResquestDto).map(student -> {
             return new ResponseEntity<>(student, HttpStatus.CREATED);
         });

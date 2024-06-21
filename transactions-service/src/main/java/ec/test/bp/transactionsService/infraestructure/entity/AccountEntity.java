@@ -1,6 +1,6 @@
 package ec.test.bp.transactionsService.infraestructure.entity;
 
-import ec.test.bp.transactionsService.domain.model.constant.AcciontConstant;
+import ec.test.bp.transactionsService.domain.model.constant.AccountConstant;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -22,15 +23,18 @@ public class AccountEntity {
     private String numberAccount;
 
     @Column("type_account")
-    private AcciontConstant.TypeAccount typeAccount;
+    private AccountConstant.TypeAccount typeAccount;
 
     @Column("initial_balance")
     private BigDecimal initialBalance;
 
     @Column("state")
-    private AcciontConstant.State state;
+    private AccountConstant.State state;
 
     @Column("customer_id")
     private Long customerId;
+
+    @Column("date_create")
+    private Date dateCreate;
 
 }

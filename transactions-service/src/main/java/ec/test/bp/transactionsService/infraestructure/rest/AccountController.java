@@ -1,6 +1,5 @@
-package ec.test.bp.transactionsService.infraestructure.mapper.rest;
+package ec.test.bp.transactionsService.infraestructure.rest;
 
-import ec.test.bp.transactionsService.application.service.AccountService;
 import ec.test.bp.transactionsService.domain.model.dto.AccountDto;
 import ec.test.bp.transactionsService.domain.model.dto.AccountResquestDto;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +12,9 @@ import reactor.core.publisher.Mono;
 public interface AccountController {
 
     @GetMapping("/{id}")
-    Mono<ResponseEntity<AccountDto>> getCostumerById(@PathVariable("id") Long id);
+    Mono<ResponseEntity<AccountDto>> getAccountById(@PathVariable("id") Long id);
 
     @PostMapping
-    Mono<ResponseEntity<AccountDto>> createCustomer(@RequestBody AccountResquestDto accountResquestDto);
+    Mono<ResponseEntity<AccountDto>> createAccount(@RequestBody AccountResquestDto accountResquestDto);
 
 }
