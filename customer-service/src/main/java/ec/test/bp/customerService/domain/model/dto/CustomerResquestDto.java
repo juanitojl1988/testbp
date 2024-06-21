@@ -1,16 +1,16 @@
 package ec.test.bp.customerService.domain.model.dto;
 
+import ec.test.bp.customerService.domain.model.constant.CustomerEnum;
 import ec.test.bp.customerService.domain.model.constant.PersonEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder
 @Getter
 @Setter
-public class CustomerResquest {
+public class CustomerResquestDto {
+
 
     private String identification;
     private String name;
@@ -18,6 +18,7 @@ public class CustomerResquest {
     private int age;
     private String addresses;
     private String phone;
+    private String password;
 
 
 }

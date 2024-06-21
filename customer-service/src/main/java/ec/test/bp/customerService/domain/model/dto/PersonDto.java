@@ -2,12 +2,14 @@ package ec.test.bp.customerService.domain.model.dto;
 
 import ec.test.bp.customerService.domain.model.constant.CustomerEnum;
 import ec.test.bp.customerService.domain.model.constant.PersonEnum;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
 @Builder
-public class CustomerDto {
+public class PersonDto {
 
     private Long id;
     private String identification;
@@ -16,10 +18,14 @@ public class CustomerDto {
     private int age;
     private String addresses;
     private String phone;
-    private String password;
-    private CustomerEnum.State state;
 
-    public CustomerDto() {
+    public PersonDto(String name, String identification, PersonEnum.Gender gender, int age, String addresses, String phone) {
+        this.name = name;
 
+        this.identification = identification;
+        this.gender = gender;
+        this.age = age;
+        this.addresses = addresses;
+        this.phone = phone;
     }
 }

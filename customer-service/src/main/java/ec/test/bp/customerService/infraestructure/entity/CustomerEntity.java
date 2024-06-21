@@ -12,22 +12,17 @@ import org.springframework.data.relational.core.mapping.Table;
 @Getter
 @Setter
 @Table(name = "customer")
-@Data
-public class CustomerEntity  {
+public class CustomerEntity extends  PersonEntity {
 
-    @Id
-    @Column("customerid")
-    private Long customerid;
+
     @Column("state")
     private CustomerEnum.State state;
     @Column("password")
     private String password;
 
+    public CustomerEntity() {}
 
-    public CustomerEntity(Long personId, String identification, String name, PersonEnum.Gender gender, int age, String addresses, String phone, Long customerid, CustomerEnum.State state, String password) {
-
-        this.customerid = customerid;
-        this.state = state;
-        this.password = password;
+    public CustomerEntity(Long personId, String identification, String name, PersonEnum.Gender gender, int age, String addresses, String phone) {
+        super(personId, identification, name, gender, age, addresses, phone);
     }
 }
