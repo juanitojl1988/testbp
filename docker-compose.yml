@@ -8,12 +8,11 @@ services:
       context: ./customer-service/
       dockerfile: Dockerfile
     environment:
-      - DATABASE_URL=jdbc:sqlserver://order-db:1433;databaseName=customer-service;encrypt=true;trustServerCertificate=true
-      - DATABASE_USER=sa
-      - DATABASE_PASSWORD=@Potter77
+      - DATABASE_URL=r2dbc:postgresql://localhost:5432/db_customer
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=123123
       - PORT=8080
-      - PRODUCT_SERVICE_URL=http://product-service:8081
-      - USER_SERVICE_URL=http://transnation-service:8082
+      - TRANSACTION_SERVICE_URL=http://transactions-service:8082
     ports:
       - "8080:8080"
     restart: on-failure
@@ -25,21 +24,22 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - order-db
+      - db_customer
     networks:
       - reactive-network
      
-  transnation-service:
-    container_name: transnation-service
-    image: transnation-service
+  transactions-service:
+    container_name: transactions-service
+    image: transactions-service
     build:
-      context: ./transnation-service/
+      context: ./transactions-service/
       dockerfile: Dockerfile
     environment:
-      - DATABASE_URL=jdbc:postgresql://user-db:5432/postgres
+      - DATABASE_URL=r2dbc:postgresql://localhost:5432/db_transactions
       - DATABASE_URL=postgres
-      - DATABASE_PASSWORD=postgres
+      - DATABASE_PASSWORD=123123
       - PORT=8082
+      - CUSTOMER_SERVICE_URL=http://customer-service:8080
     ports:
       - "8082:8082"
     restart: on-failure
@@ -51,20 +51,34 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - user-db
+      - db_transactions
     networks:
       - reactive-network
       
-  db:
-    container_name: db
+  db_customer:
+    container_name: ddb_customer
     image: postgres:latest
     environment:
-      - POSTGRES_DB=transnation-service
+      - POSTGRES_DB=db_customer
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - TZ=America/Sao_Paulo
+      - POSTGRES_PASSWORD=123123
+      - TZ=America/Guayaquil
     ports:
       - "5432:5432"
+    restart: on-failure
+    networks:
+      - reactive-network
+      
+  db_transactions:
+    container_name: db_transactions
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=db_transnation
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123123
+      - TZ=America/Guayaquil
+    ports:
+      - "5433:5432"
     restart: on-failure
     networks:
       - reactive-network
