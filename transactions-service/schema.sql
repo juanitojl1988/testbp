@@ -1,5 +1,5 @@
 CREATE TABLE account (
-    id BIGINT PRIMARY KEY,
+    id serial4 PRIMARY KEY,
     number_account VARCHAR(62),
     type_account VARCHAR(10),
     initial_balance DECIMAL(19, 2),
@@ -9,7 +9,7 @@ CREATE TABLE account (
 );
 
 CREATE TABLE transaction (
-    id BIGINT PRIMARY KEY,
+    id serial4 PRIMARY KEY,
     date_transaction TIMESTAMP,
     type_transaction VARCHAR(10),
     value DECIMAL(19, 2),
@@ -18,3 +18,13 @@ CREATE TABLE transaction (
     account_id BIGINT,
     FOREIGN KEY (account_id) REFERENCES account(id)
 );
+
+
+{
+    "numberAccount": "222222222222",
+    "typeAccount": "A",
+    "initialBalance": "5",
+    "state": "A",
+    "customerId": 1
+}
+

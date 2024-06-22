@@ -4,8 +4,7 @@ public class AccountConstant {
 
     public enum TypeAccount {
         A,
-        B,
-        C
+        C,
     }
 
     public enum State {

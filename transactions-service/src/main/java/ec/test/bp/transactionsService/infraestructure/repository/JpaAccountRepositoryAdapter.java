@@ -50,4 +50,9 @@ public class JpaAccountRepositoryAdapter implements AccountRepositoryPort {
                     return Mono.error(new AccountNotCreateException(e.getMessage()));
                 });
     }
+
+    @Override
+    public Mono<Boolean> existAccountByNumAccount(String numAccount) {
+       return jpaAccountRepository.existsByNumberAccountAndState(numAccount);
+    }
 }

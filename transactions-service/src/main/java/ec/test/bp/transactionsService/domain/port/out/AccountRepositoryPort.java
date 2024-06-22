@@ -8,5 +8,5 @@ public  interface  AccountRepositoryPort {
 
     Mono<AccountDto> getById(Long id);
     Mono<AccountDto> create(AccountResquestDto accountResquestDto);
-
+    Mono<Boolean> existAccountByNumAccount(String numAccount);
 }

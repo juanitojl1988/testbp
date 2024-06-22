@@ -22,9 +22,9 @@ public class AccountControllerImp implements AccountController {
     @Override
     public Mono<ResponseEntity<AccountDto>> getAccountById(Long id) {
         log.info("getAccountById: Id={}", id);
-        return accountService.getById(id).map(student -> {
-            return new ResponseEntity<>(student, HttpStatus.OK);
-        }).defaultIfEmpty(ResponseEntity.notFound().build());
+        return accountService.getById(id).map(account -> {
+            return new ResponseEntity<>(account, HttpStatus.OK);
+        });
     }
 
     @Override
@@ -33,5 +33,15 @@ public class AccountControllerImp implements AccountController {
         return accountService.create(accountResquestDto).map(student -> {
             return new ResponseEntity<>(student, HttpStatus.CREATED);
         });
+    }
+
+    @Override
+    public Mono<ResponseEntity<AccountDto>> updateAccount(Long id, AccountResquestDto accountResquestDto) {
+        return null;
+    }
+
+    @Override
+    public Mono<ResponseEntity> removeAccount(Long id) {
+        return null;
     }
 }
